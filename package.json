@@ -1,0 +1,15 @@
+{
+  "name": "todo-list-buggy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Todo List statis (HTML/CSS/JS) - website Pemerintah",
+  "type": "module",
+  "scripts": {
+    "lint": "node scripts/lint.mjs",
+    "test": "node --test",
+    "build": "node scripts/build.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

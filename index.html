@@ -30,6 +30,13 @@
   const list = document.getElementById('list');
 
   let todos = JSON.parse(localStorage.getItem('todos') || '[]');
+  let lastId = todos.reduce((max, t) => Math.max(max, Number(t.id) || 0), 0);
+
+  // id harus unik, walau beberapa todo ditambahkan pada milidetik yang sama
+  function generateId() {
+    lastId = Math.max(Date.now(), lastId + 1);
+    return lastId;
+  }
 
   function save() {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -62,7 +69,7 @@
   }
 
   function addTodo(text) {
-    todos.push({ id: Date.now(), text, done: false });
+    todos.push({ id: generateId(), text, done: false });
     save();
     render();
   }
@@ -73,9 +80,9 @@
     render();
   }
 
-  // BUG: delete tidak jalan - filter tidak di-assign ulang
   function deleteTodo(id) {
-    todos.filter((t) => t.id !== id);
+    // filter harus di-assign ulang ke `todos` agar item benar-benar hilang dari state
+    todos = todos.filter((t) => String(t.id) !== String(id));
     save();
     render();
   }
