@@ -24,9 +24,8 @@ export default function App() {
     setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)))
   }
 
-  // BUG: delete tidak jalan - filter tidak di-assign ulang
   function deleteTodo(id) {
-    todos.filter((t) => t.id !== id)
+    setTodos((prev) => prev.filter((t) => t.id !== id))
   }
 
   function handleSubmit(e) {
